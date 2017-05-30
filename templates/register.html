@@ -1,0 +1,54 @@
+<html>
+	<head>
+		<title>Demo-Register</title>
+	</head>
+	<body>
+		<h2>Please Register Here</h2>
+		<form action="" method="post" role="form">
+			{{form.csrf}}
+			<table>
+				<tr>
+					<td><label for="email">Email:</label></td>
+					<td><input type="text" name="email"></td>
+				</tr>
+				<tr>
+					<td><label for="first">First Name:</label></td>
+					<td><input type="text" name="first"></td>
+					<td>Minimum Length 2</td>
+				</tr>
+				<tr>
+					<td><label for="last">Last Name:</label></td>
+					<td><input type="text" name="last"></td>
+					<td>Minimum Length 2</td>
+				</tr>
+				<tr>
+					<td><label for="pass1">Password:</label></td>
+					<td><input type="password" name="pass1"></td>
+					<td>Password must be between 8 and 16 characters.</td>
+				</tr>
+				<tr>
+					<td><label for="pass2">Re-Type Password:</label></td>
+					<td><input type="password" name="pass2"></td>
+				</tr>
+			</table>
+			<button type="submit">Submit</button>
+		</form>
+		{% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+		        {% for message in messages %}
+		            {% if "Error" not in message[1]: %}
+		                <div class="alert alert-info">
+		                <strong>Success! </strong> {{ message[1] }}
+		                </div>
+		            {% endif %}
+		 
+		            {% if "Error" in message[1]: %}
+		                <div class="alert alert-warning">
+		                {{ message[1] }}
+		                </div>
+		            {% endif %}
+		        {% endfor %}
+            {% endif %}
+        {% endwith %}
+	</body>
+</html>
